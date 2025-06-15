@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpbk7bdb8w7hv"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_34107"]
+[ext_resource type="Texture2D" uid="uid://h7lvmjqo3dmi" path="res://Assets/sabackground.jpg" id="2_453gd"]
+[ext_resource type="AudioStream" uid="uid://jagbm5tr2gwg" path="res://Assets/ocean-waves-250310.mp3" id="3_nuhvp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_34107")
+game_scene_path = "res://Scenes/Main.tscn"
+options_scene_path = "res://Scenes/Options.tscn"
+credits_scene_path = "res://Scenes/Credits.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuVBox"]
+layout_mode = 2
+texture = ExtResource("2_453gd")
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="MenuVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "FAN GAME"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="MenuVBox"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="MenuVBox"]
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MenuVBox"]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_nuhvp")
+volume_db = 10.0
+autoplay = true

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://5psr1vmpkiq"]
+
+[ext_resource type="Script" path="res://Scripts/FishBarItem.gd" id="1_ut1qg"]
+[ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="2_1nw6v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my167"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="FishBarItem" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_my167")
+script = ExtResource("1_ut1qg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_1nw6v")
+expand_mode = 3
+
+[node name="CountLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://oclabpthhmsx"]
+
+[ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="1_xhn4s"]
+[ext_resource type="Script" path="res://Scripts/FishIcon.gd" id="2_8ccvu"]
+
+[node name="FishIcon" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_xhn4s")
+expand_mode = 3
+script = ExtResource("2_8ccvu")

@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://di6usl7jlfihy"]
+
+[ext_resource type="Script" path="res://Scripts/Credits.gd" id="1_uh30c"]
+[ext_resource type="AudioStream" uid="uid://dyb64u5ur5da7" path="res://Assets/saba_saba.ogg" id="2_ilsfu"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uh30c")
+menu_scene_path = "res://Scenes/MainMenu.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RichText" type="RichTextLabel" parent="VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(174, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "SABA: SABA
+Sound Effect by <a href=\"https://pixabay.com/users/richardmultimedia-20862125/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=250310\">Richard Multimedia</a> from <a href=\"https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=250310\">Pixabay</a>"
+fit_content = true
+scroll_following = true
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ilsfu")
+autoplay = true

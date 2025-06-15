@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi6nq44dsggfq"]
+
+[ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="1_5wpjd"]
+[ext_resource type="Script" path="res://Scripts/Fish.gd" id="1_far6f"]
+
+[node name="Fish" type="Node2D"]
+script = ExtResource("1_far6f")
+speed = 75.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_5wpjd")
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CoinTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
