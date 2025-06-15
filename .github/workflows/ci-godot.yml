@@ -15,7 +15,7 @@ jobs:
 
     steps:
       # 1) Check out your repository
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # 2) (Optional) build your site or export your game here
       # - name: Build site
