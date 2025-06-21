@@ -17,4 +17,3 @@ func _on_options_pressed() -> void:
 
 func _on_credits_pressed() -> void:
 	get_tree().change_scene_to_file(credits_scene_path)
-

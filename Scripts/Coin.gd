@@ -5,6 +5,7 @@ signal collected
 @export var fall_speed: float = 100.0  
 @export var lifetime:   float = 10.0 
 @export var value:      int = 10  
+@export var threshold: int = 64
 
 var _age := 0.0
 var stop_y: float
@@ -39,7 +40,7 @@ func _ready() -> void:
 
 	match value:
 		10:
-			sprite_node.modulate = Color(0.9, 0.9, 0.9)
+			sprite_node.modulate = Color(0.1, 0.1, 0.1)
 		50:
 			sprite_node.modulate = Color(0,   1.0, 0)
 		100:
@@ -50,7 +51,7 @@ func _ready() -> void:
 			sprite_node.modulate = Color(1,1,1)
 
 	var sh = get_viewport().get_visible_rect().size.y
-	stop_y = sh - randf_range(10.0, 128.0)
+	stop_y = sh - randf_range(10.0, threshold)
 
 func _process(delta: float) -> void:
 	if not has_landed:

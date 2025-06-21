@@ -1,11 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://bi6nq44dsggfq"]
 
 [ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="1_5wpjd"]
-[ext_resource type="Script" path="res://Scripts/Fish.gd" id="1_far6f"]
+[ext_resource type="Script" uid="uid://c640gdwrf7bye" path="res://Scripts/Fish.gd" id="1_far6f"]
 
-[node name="Fish" type="Node2D"]
+[node name="Fish" type="Node2D" node_paths=PackedStringArray("Icon")]
 script = ExtResource("1_far6f")
-speed = 75.0
+Icon = NodePath("Icon")
+speed = 50.0
+speed_variation = 0.5
+wobble_speed_ratio = 0.05
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_5wpjd")
@@ -18,3 +21,9 @@ autostart = true
 [node name="CoinTimer" type="Timer" parent="."]
 wait_time = 7.0
 autostart = true
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_5wpjd")

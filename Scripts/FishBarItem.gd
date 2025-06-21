@@ -2,16 +2,26 @@ extends PanelContainer
 
 signal drag_started(data)
 
-@export var fish_scene: PackedScene
+@export var scene: PackedScene
+@export var countLabel: Label
+@export var priceLabel: Label
+@export var icon: TextureRect
 var count: int = 0
+var price: int = 0
 
-@onready var icon = $HBoxContainer/Icon
-@onready var label = $HBoxContainer/CountLabel as Label
+func _ready() -> void:
+	_update_icon()
+	mouse_filter = Control.MOUSE_FILTER_STOP
 
-func set_count(n: int) -> void:
-	count = n
-	if label:
-		label.text = str(n)
+func set_price(_price: int) -> void:
+	price = _price
+	if priceLabel:
+		priceLabel.text = str(price)
+
+func set_count(_count: int) -> void:
+	count = _count
+	if countLabel:
+		countLabel.text = str(count)
 	else:
 		push_error("FishBarItem.gd: could not find CountLabel node!")
 
@@ -21,9 +31,6 @@ func set_count(n: int) -> void:
 	else:
 		modulate = Color(1,1,1,1)
 		mouse_filter = Control.MOUSE_FILTER_STOP
-
-func _ready() -> void:
-	mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	if count <= 0:
@@ -45,8 +52,27 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
 	return {
 		"type":       "fish_icon",
-		"fish_scene": fish_scene
+		"fish_scene": scene
 	}
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	return false
+
+func _update_icon() -> void:
+	if not scene:
+		return
+	# Instance a temp fish to grab its texture/frame
+	var fish = scene.instantiate()
+	var tex: Texture2D = null
+
+	if fish.has_node("Icon"):
+		tex = fish.get_node("Icon").texture
+	elif fish.has_node("AnimatedSprite2D"):
+		var anim = fish.get_node("AnimatedSprite2D") as AnimatedSprite2D
+		# grab first frame of the default animation
+		var anim_name = anim.animation
+		tex = anim.frames.get_frame(anim_name, 0)
+	fish.queue_free()
+
+	if tex:
+		icon.texture = tex

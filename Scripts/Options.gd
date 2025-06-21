@@ -7,10 +7,12 @@ const MIN_DB := -40.0
 @onready var slider = $Panel/VBoxContainer/VolumeSlider
 @onready var label  = $Panel/VBoxContainer/VolumeLabel
 @onready var back   = $Panel/VBoxContainer/BackButton
+@onready var reset_btn  = $Panel/VBoxContainer/ResetButton
 
 func _ready() -> void:
 	back.pressed.connect(Callable(self, "_on_back_pressed"))
 	slider.value_changed.connect(Callable(self, "_on_slider_value_changed"))
+	reset_btn.pressed.connect(Callable(self, "_on_reset_pressed"))
 
 	var bus = AudioServer.get_bus_index("Master")
 	var current_db = AudioServer.get_bus_volume_db(bus)
@@ -28,4 +30,10 @@ func _update_label(pct: float) -> void:
 	label.text = "Volume: %d%%" % pct
 
 func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file(menu_scene_path)
+
+func _on_reset_pressed() -> void:
+	# Clear the saved JSON
+	SaveManager.clear_save()
+	# Reload the menu so everything starts fresh
 	get_tree().change_scene_to_file(menu_scene_path)

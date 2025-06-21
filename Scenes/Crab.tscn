@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://c60y1jwkg6fqi"]
+
+[ext_resource type="Script" uid="uid://brxv6g3yuqq12" path="res://Scripts/crab.gd" id="1_ouv02"]
+[ext_resource type="Texture2D" uid="uid://c6ntnv2tu2m7t" path="res://Assets/crabSpritesheet.png" id="2_03ywb"]
+[ext_resource type="Texture2D" uid="uid://7k1qkv70xmha" path="res://Assets/kani.png" id="3_ip4u0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03ywb"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(0, 0, 534, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip4u0"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(534, 0, 534, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xturp"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(1068, 0, 534, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oteuq"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(0, 318, 534, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xbrt"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(534, 318, 534, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp48x"]
+atlas = ExtResource("2_03ywb")
+region = Rect2(1068, 318, 534, 318)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ouv02"]
+animations = [{
+"frames": [{
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_03ywb")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_ip4u0")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_xturp")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_oteuq")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_2xbrt")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_hp48x")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_03ywb")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_ip4u0")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_xturp")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_oteuq")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_2xbrt")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_hp48x")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Crab" type="Node2D" node_paths=PackedStringArray("Icon")]
+script = ExtResource("1_ouv02")
+detect_radius = 500.0
+Icon = NodePath("Icon")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ouv02")
+animation = &"walk"
+frame_progress = 0.448388
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ip4u0")
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://5psr1vmpkiq"]
 
-[ext_resource type="Script" path="res://Scripts/FishBarItem.gd" id="1_ut1qg"]
+[ext_resource type="Script" uid="uid://d4hmwip5sg54c" path="res://Scripts/FishBarItem.gd" id="1_ut1qg"]
 [ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="2_1nw6v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my167"]
@@ -10,18 +10,35 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="FishBarItem" type="PanelContainer"]
+[node name="FishBarItem" type="PanelContainer" node_paths=PackedStringArray("countLabel", "priceLabel", "icon")]
+custom_minimum_size = Vector2(100, 100)
 theme_override_styles/panel = SubResource("StyleBoxFlat_my167")
 script = ExtResource("1_ut1qg")
+countLabel = NodePath("HBoxContainer/CountLabel")
+priceLabel = NodePath("HBoxContainer/VBoxContainer/PriceLabel")
+icon = NodePath("HBoxContainer/VBoxContainer/Icon")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(54, 54)
 layout_mode = 2
 texture = ExtResource("2_1nw6v")
 expand_mode = 3
 
+[node name="PriceLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CountLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

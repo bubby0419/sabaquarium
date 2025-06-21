@@ -1,0 +1,108 @@
+{
+	"textures": [
+		{
+			"image": "crabSpritesheet.png",
+			"size": {
+				"w": 1603,
+				"h": 636
+			},
+			"sprites": [
+				{
+					"filename": "crab6.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 533,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "crab1.png",
+					"region": {
+						"x": 536,
+						"y": 1,
+						"w": 532,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "crab2.png",
+					"region": {
+						"x": 1070,
+						"y": 1,
+						"w": 532,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "crab3.png",
+					"region": {
+						"x": 1,
+						"y": 319,
+						"w": 532,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "crab4.png",
+					"region": {
+						"x": 535,
+						"y": 319,
+						"w": 532,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "crab5.png",
+					"region": {
+						"x": 1069,
+						"y": 319,
+						"w": 532,
+						"h": 316
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:50888ed3f7278421330490ad4a4e7648:299dc051d89cee807fafa88fd8c303b5:a8d68fb998673f0e869ef836fd9b79d7$"
+	}
+}
