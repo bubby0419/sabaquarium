@@ -21,13 +21,17 @@ var base_sprite_y: float
 @export var price: int = 2000
 @export var threshold: int = 64
 
+var spawn_time: float
+
 var bottom_line_y: float
 
 func _ready() -> void:
 	# start walking animation
 	anim.play("walk")
 	 # ——— calculate half_extent using the first frame texture ———
-	
+	if !spawn_time:
+		spawn_time = Time.get_unix_time_from_system()
+		
 	var frame_tex: Texture2D = null
 	var anim_name = anim.animation
 	if anim.sprite_frames.has_animation(anim_name) and anim.sprite_frames.get_frame_count(anim_name) > 0:

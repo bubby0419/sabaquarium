@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5psr1vmpkiq"]
 
 [ext_resource type="Script" uid="uid://d4hmwip5sg54c" path="res://Scripts/FishBarItem.gd" id="1_ut1qg"]
-[ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="2_1nw6v"]
+[ext_resource type="Texture2D" uid="uid://087yudc0werm" path="res://Assets/sabafish - level 1.png" id="2_7i1td"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_my167"]
 border_width_left = 2
@@ -28,7 +28,7 @@ layout_mode = 2
 [node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(54, 54)
 layout_mode = 2
-texture = ExtResource("2_1nw6v")
+texture = ExtResource("2_7i1td")
 expand_mode = 3
 
 [node name="PriceLabel" type="Label" parent="HBoxContainer/VBoxContainer"]

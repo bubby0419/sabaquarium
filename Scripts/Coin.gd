@@ -6,6 +6,7 @@ signal collected
 @export var lifetime:   float = 10.0 
 @export var value:      int = 10  
 @export var threshold: int = 64
+@export var touch_area_multiplier: float = 2.0
 
 var _age := 0.0
 var stop_y: float
@@ -50,8 +51,13 @@ func _ready() -> void:
 		_:
 			sprite_node.modulate = Color(1,1,1)
 
+	#if has_node("CollisionShape2D"):
+		#var cs = $CollisionShape2D.shape
+		#if cs is CircleShape2D:
+			#cs.radius = (sprite_node.texture.get_width() * sprite_node.scale.x * 0.5) * touch_area_multiplier
+
 	var sh = get_viewport().get_visible_rect().size.y
-	stop_y = sh - randf_range(10.0, threshold)
+	stop_y = sh - randf_range(15.0, threshold)
 
 func _process(delta: float) -> void:
 	if not has_landed:

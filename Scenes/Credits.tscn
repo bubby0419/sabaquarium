@@ -32,10 +32,16 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="RichText" type="RichTextLabel" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RichText" type="RichTextLabel" parent="VBoxContainer/ScrollContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(174, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "SABA: SABA

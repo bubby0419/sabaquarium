@@ -1,6 +1,13 @@
-extends Node2D
+extends Area2D
+class_name Fish   # ← add this at the top
 
-signal pop_coin(position: Vector2)
+signal fish_selected(fish_node: Node2D)
+signal fuse_request(fish_a: Fish, fish_b: Fish)
+signal pop_coin(position: Vector2, variation_level: int)
+
+@export var variation_level:    int           = 1
+@export var next_variation_scene: PackedScene = null
+@export var fusion_cost:        int           = 100
 
 @export var Icon: TextureRect;
 
@@ -21,6 +28,9 @@ signal pop_coin(position: Vector2)
 @export var coin_probability: float = 0.5
 @export var threshold: int = 64
 
+
+var spawn_time: float
+
 var _base_speed: float
 
 var half_extent: Vector2
@@ -32,7 +42,19 @@ var direction: Vector2 = Vector2.ZERO
 
 var base_sprite_offset: Vector2
 
+const DRAG_THRESHOLD := 8
+var _dragging: bool = false
+var _drag_waiting := false
+
+var _drag_start_pos := Vector2.ZERO
+var _drag_offset := Vector2.ZERO
+
 func _ready() -> void:
+	input_pickable = true
+	
+	if !spawn_time:
+		spawn_time = Time.get_unix_time_from_system()
+	
 	var screen_w = get_viewport().get_visible_rect().size.x
 	var tex_w    = $Sprite.texture.get_width()
 	var base     = (screen_w * size_ratio) / tex_w
@@ -82,9 +104,6 @@ func _process(delta: float) -> void:
 
 	$Sprite.flip_h = direction.x < 0
 
-	#if direction.length() > 0:
-	#	rotation = atan2(direction.y, abs(direction.x))
-		
 	# Wobble
 	wobble_time += delta
 	var bob = sin(wobble_time * wobble_speed) * wobble_amplitude
@@ -93,6 +112,40 @@ func _process(delta: float) -> void:
 	
 	var max_tilt = deg_to_rad(wobble_tilt_degrees)
 	$Sprite.rotation = sin(wobble_time * wobble_speed) * max_tilt
+	
+	var mp = get_viewport().get_mouse_position()
+
+	# Only promote to dragging here, never clear _drag_waiting:
+	if _drag_waiting and not _dragging and mp.distance_to(_drag_start_pos) > DRAG_THRESHOLD:
+		_dragging     = true
+		_drag_waiting = false
+		_drag_offset  = global_position - mp
+		get_viewport().set_input_as_handled()
+
+	if _dragging:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			global_position = mp + _drag_offset
+			get_viewport().set_input_as_handled()
+		else:
+			_dragging = false
+			_try_fuse()
+
+func _input_event(_viewport, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_drag_waiting = true
+			_drag_start_pos   = get_viewport().get_mouse_position()
+			get_viewport().set_input_as_handled()
+		else:
+			if _dragging:
+				_dragging = false
+				_try_fuse()
+			elif _drag_waiting:
+				print("FISH SELECTED")
+				emit_signal("fish_selected", self)
+			_drag_waiting = false
+			get_viewport().set_input_as_handled()
+		return
 
 func _apply_speed_variation() -> void:
 	# random ±variation around base speed
@@ -116,5 +169,21 @@ func _schedule_coin_timer() -> void:
 
 func _on_CoinTimer_timeout() -> void:
 	if randf() < coin_probability:
-		emit_signal("pop_coin", global_position)
+		emit_signal("pop_coin", global_position, variation_level)
 	_schedule_coin_timer()
+
+func _try_fuse() -> void:
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = global_position
+	params.collide_with_areas = true
+	params.collide_with_bodies = false
+	# exclude yourself by RID
+	params.exclude = [get_rid()]
+	# look for another fish of same variation at drop point
+	var space = get_world_2d().direct_space_state
+	var results = space.intersect_point(params)
+	for hit in results:
+		var other = hit.collider
+		if other is Fish and other.variation_level == variation_level:
+			emit_signal("fuse_request", self, other)
+			return

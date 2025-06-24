@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpbk7bdb8w7hv"]
+[gd_scene load_steps=9 format=3 uid="uid://dpbk7bdb8w7hv"]
 
 [ext_resource type="Script" uid="uid://c2oxpi0qsko4p" path="res://Scripts/MainMenu.gd" id="1_34107"]
-[ext_resource type="Texture2D" uid="uid://h7lvmjqo3dmi" path="res://Assets/sabackground.jpg" id="2_453gd"]
+[ext_resource type="Texture2D" uid="uid://ybvan1nlljys" path="res://Assets/saba god.png" id="2_8saeu"]
+[ext_resource type="FontFile" uid="uid://qolxeoaigh1t" path="res://Assets/Atop.ttf" id="3_ghw46"]
 [ext_resource type="AudioStream" uid="uid://jagbm5tr2gwg" path="res://Assets/ocean-waves-250310.mp3" id="3_nuhvp"]
+[ext_resource type="Texture2D" uid="uid://b47k0xibvmqc5" path="res://Assets/shell3.png" id="4_df05h"]
+[ext_resource type="Texture2D" uid="uid://dskjnod2to0i2" path="res://Assets/shell1.png" id="5_xim88"]
+[ext_resource type="Texture2D" uid="uid://blt0a85l0lprj" path="res://Assets/shell2.png" id="6_koqhg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghw46"]
+font = ExtResource("3_ghw46")
+font_size = 40
+font_color = Color(0.380392, 0.796078, 0.94902, 1)
+outline_size = 15
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,47 +26,54 @@ game_scene_path = "res://Scenes/Main.tscn"
 options_scene_path = "res://Scenes/Options.tscn"
 credits_scene_path = "res://Scenes/Credits.tscn"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_8saeu")
+expand_mode = 3
 
 [node name="MenuVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -198.5
+offset_right = 198.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MenuVBox"]
-layout_mode = 2
-texture = ExtResource("2_453gd")
-stretch_mode = 3
-
 [node name="Title" type="Label" parent="MenuVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "SABAQUARIUM V0.2"
+text = "SABAQUARIUM V0.3"
+label_settings = SubResource("LabelSettings_ghw46")
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="MenuVBox"]
 layout_mode = 2
 text = "Start Game"
+icon = ExtResource("4_df05h")
+expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="MenuVBox"]
 layout_mode = 2
 text = "Options"
+icon = ExtResource("5_xim88")
+expand_icon = true
 
 [node name="CreditsButton" type="Button" parent="MenuVBox"]
 layout_mode = 2
 text = "Credits
 "
+icon = ExtResource("6_koqhg")
+expand_icon = true
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_nuhvp")

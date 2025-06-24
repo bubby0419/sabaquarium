@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi6nq44dsggfq"]
+
+[ext_resource type="Texture2D" uid="uid://dxcnm7xm6retr" path="res://Assets/sabafish.png" id="1_5wpjd"]
+[ext_resource type="Script" uid="uid://c640gdwrf7bye" path="res://Scenes/Fishes/Fish.gd" id="1_far6f"]
+[ext_resource type="PackedScene" uid="uid://c16dvsb1unm4f" path="res://Scenes/Fishes/Fish_level2/Fish_level2.tscn" id="2_j7bd2"]
+[ext_resource type="Texture2D" uid="uid://087yudc0werm" path="res://Assets/sabafish - level 1.png" id="3_cbdu1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_two43"]
+radius = 105.0
+height = 314.0
+
+[node name="Fish" type="Area2D" node_paths=PackedStringArray("Icon")]
+script = ExtResource("1_far6f")
+next_variation_scene = ExtResource("2_j7bd2")
+Icon = NodePath("Icon")
+size_ratio = 0.05
+speed = 50.0
+speed_variation = 0.5
+wobble_speed_ratio = 0.05
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_cbdu1")
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CoinTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+offset_right = 400.0
+offset_bottom = 400.0
+texture = ExtResource("1_5wpjd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-20, -1)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_two43")
